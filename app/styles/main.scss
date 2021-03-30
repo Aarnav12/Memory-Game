@@ -1,0 +1,441 @@
+// bower:scss
+// endbower
+
+$cyan: #2faf97;
+$yellow: #fde645;
+$base-font-family: 'Barlow Condensed', sans-serif;
+$heading-font-family: 'Bungee', sans-serif;
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+.browserupgrade {
+	margin: 0.2em 0;
+	background: #ccc;
+	color: #000;
+	padding: 0.2em 0;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	background: #0e2d31;
+	background: linear-gradient(-135deg, rgba(14, 45, 48, 0.85), rgba(69, 20, 67, 0.85)), linear-gradient(277deg, #57d967, rgba(20, 63, 69, 0.85)), linear-gradient(-73deg, #d95757, rgba(20, 63, 69, 0.85));
+	font-family: $base-font-family;
+	font-size: 16px;
+	color: #333;
+	padding: 20px;
+	text-align: center;
+}
+
+header {
+	max-width: 700px;
+	margin: 0 auto;
+	padding-top: 25px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: space-between;
+	position: relative;
+	user-select: none;
+
+	@media only screen and (min-width : 640px) {
+		flex-direction: row;
+	}
+}
+
+h1 {
+	font-family: $heading-font-family;
+	font-size: 38px;
+	color: $cyan;
+	position: relative;
+	text-align: left;
+	order: 0;
+
+	&:after {
+		content: '.js';
+		position: absolute;
+		bottom: 3px;
+		font-size: 42px;
+		font-family: $base-font-family;
+		color: white;
+	}
+
+	span[data-letter] {
+		text-shadow: 0;
+		transition: all, .5s;
+	}
+
+	span[data-letter].active {
+		color: $yellow;
+		text-shadow: 0 0 4px $cyan;
+	}
+
+	@media only screen and (min-width : 420px) {
+		font-size: 46px;
+	}
+
+	@media only screen and (min-width : 640px) {
+		font-size: 52px;
+		order: 2;
+	}
+}
+
+.stars {
+	font-size: 24px;
+	color: $yellow;
+	margin-bottom: -23px;
+	order: 1;
+	text-align: right;
+
+	@media only screen and (min-width : 640px) {
+		font-size: 32px;
+		margin-bottom: 0;
+		width: 100%;
+	}
+}
+
+.star--disabled {
+	opacity: .1;
+}
+
+.game-info {
+	display: flex;
+	align-items: flex-end;
+	font-size: 24px;
+	margin-bottom: 5px;
+	order: 2;
+}
+
+.moves,
+.time {
+	color: $cyan;
+	text-align: left;
+}
+
+.moves__text,
+.time__text {
+	display: none;
+
+	@media only screen and (min-width : 420px) {
+		display: inline-block;
+	}
+}
+
+.moves__counter,
+.time__counter {
+	color: white;
+	display: inline-block;
+}
+
+.moves__counter {
+	width: 30px;
+}
+
+.time__counter {
+	width: 50px;
+}
+
+.reset-game-button-wrapper  {
+	width: 100%;
+	float: left;
+}
+
+.reset-game-button {
+	background-color: #18151d;
+	color: white;
+	margin: 20px auto;
+	padding: 10px 20px;
+	border-radius: 5px;
+	display: inline-block;
+	font-size: 20px;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity, .3s;
+
+	&.active {
+		opacity: .6;
+		pointer-events: auto;
+
+		&:hover {
+			opacity: 1;
+			cursor: pointer;
+		}
+	}
+}
+
+
+.game-board {
+	max-width: 700px;
+	margin: 0 auto;
+	transition: filter, .5s;
+}
+
+.game-board--disabled {
+	pointer-events: none;
+}
+
+.game-board--blurred {
+	filter: blur(15px);
+	pointer-events: none;
+}
+
+.card-wrapper {
+	position: relative;
+	width: calc(25% - 10px);
+	padding-bottom: calc(25% - 10px);
+	margin: 5px;
+	perspective: 800px;
+	float: left;
+}
+
+.card {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	border-radius: 5px;
+	transition: all, .3s;
+	transform-style: preserve-3d;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	svg path {
+		fill: white;
+		transition: fill, .3s;
+		transition-delay: 1s;
+	}
+
+	&:before,
+	&:after {
+		content: '';
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		z-index: 5;
+		opacity: 0;
+		border-radius: 10px;
+		transition: opacity, .4s;
+	}
+
+	&:before {
+		left: 0;
+		background: linear-gradient(to right, rgba(black, 0.2), transparent, rgba(white, 0.2));
+	}
+
+	&:after {
+		right: 0;
+		background: linear-gradient(to left, rgba(black, 0.2), transparent, rgba(white, 0.2));
+	}
+}
+
+.card--hovering-left {
+	transform: rotateY( -15deg );
+
+	&:before {
+		opacity: 1;
+	}
+}
+
+.card--hovering-right {
+	transform: rotateY( 15deg );
+
+	&:after {
+		opacity: 1;
+	}
+}
+
+.card__symbol {
+	font-size: 32px;
+
+	@media only screen and (min-width : 420px) {
+		font-size: 48px;
+	}
+
+	@media only screen and (min-width : 640px) {
+		font-size: 72px;
+	}
+}
+
+.card__front,
+.card__back {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	backface-visibility: hidden;
+}
+
+.card__front {
+	background-color: darken($yellow, 17%);
+
+	&:after {
+		content: '';
+		position: absolute;
+		width: calc(100% - 16px);
+		height: calc(100% - 16px);
+		top: 8px;
+		left: 8px;
+		border-radius: 8px;
+		background-color: $yellow;
+		background: linear-gradient(to top, darken($yellow, 12%), $yellow);
+		border-top: 1px solid rgba(white, 0.5);
+		opacity: 1;
+		transition: opacity, .2s;
+	}
+}
+
+.card__back {
+	background-color: lightgray;
+	box-shadow: 0 0 100px -10px rgba(black, 0.2) inset;
+	transform: rotateY( 180deg );
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all, .3s;
+	transition-delay: 1s;
+}
+
+.card--flipped {
+	&:before,
+	&:after {
+		content: none;
+	}
+
+	// Hide card__front pseudoelement after card flip to fix Safari bug where it
+	// would occasionally still show on the cards back side, blocking the symbol
+	.card__front:after {
+		opacity: 0;
+	}
+}
+
+.card--flipped-right {
+	transform: rotateY( 180deg );
+
+	&:hover {
+		transform: rotateY( 180deg );
+	}
+}
+
+.card--flipped-left {
+	transform: rotateY( -180deg );
+
+	&:hover {
+		transform: rotateY( -180deg );
+	}
+}
+
+.card--matched {
+	pointer-events: none;
+
+	.card__back {
+		background-color: $cyan;
+		box-shadow: 0 0 100px -10px rgba(darken($cyan, 20%), 0.2) inset;
+	}
+
+	.fa-heart path {
+		fill: #dc6c6c;
+	}
+
+	.fa-bolt path {
+		fill: #f9f94f;
+	}
+
+	.fa-database path {
+		fill: #1d6f6f;
+	}
+
+	.fa-gamepad path {
+		fill: #ec99e7;
+	}
+
+	.fa-gem path {
+		fill: #a0ffc5;
+	}
+
+	.fa-poo path {
+		fill: #945959;
+	}
+
+	.fa-bomb path {
+		fill: #3e3e3e;
+	}
+
+	.fa-flask path {
+		fill: #55f2ff;
+	}
+
+}
+
+.end-screen {
+	width: 80%;
+	max-width: 500px;
+	padding: 30px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 20px;
+	position: absolute;
+	z-index: 10;
+	top: -250px;
+	left: 50%;
+	transform: translateX(-50%);
+	transition: top, .5s;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+
+	@media only screen and (min-width : 640px) {
+		padding: 40px;
+	}
+}
+
+.end-screen--active {
+	top: 150px;
+
+	@media only screen and (min-width : 640px) {
+		top: 200px;
+	}
+}
+
+.end-screen__message {
+	font-family: $heading-font-family;
+	font-size: 28px;
+	color: darken($cyan, 20%);
+
+	@media only screen and (min-width : 640px) {
+		font-size: 36px;
+	}
+}
+
+.end-screen__stats {
+	display: flex;
+	justify-content: space-around;
+	background-color: rgba(0, 0, 0, 0.1);
+	padding: 15px;
+	margin-top: 30px;
+	border-radius: 10px;
+}
+
+.end-screen__stars,
+.end-screen__timer {
+	font-size: 24px;
+	color: $cyan;
+
+	@media only screen and (min-width : 640px) {
+		font-size: 32px;
+	}
+}
+
+.end-screen__stars {
+
+	.star--disabled {
+		opacity: .2;
+	}
+}

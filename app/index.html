@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Memory Game for Udacity Front-End Web Developer Nanodegree">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Bungee|Barlow+Condensed" rel="stylesheet">
+		<title>Memory Game</title>
+
+		<!-- Place favicon.ico in the root directory -->
+
+		<!-- build:css styles/vendor.css -->
+		<!-- bower:css -->
+		<!-- endbower -->
+		<!-- endbuild -->
+
+		<!-- build:css styles/main.css -->
+		<link rel="stylesheet" href="styles/reset.css">
+		<link rel="stylesheet" href="styles/main.css">
+		<!-- endbuild -->
+
+	</head>
+		<body>
+		<!--[if IE]>
+			<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
+
+		<header>
+			<div class="stars">
+				<i class="fa fa-star star"></i>
+				<i class="fa fa-star star"></i>
+				<i class="fa fa-star star"></i>
+			</div>
+			<h1 class="logo">Memorize</h1>
+			<div class="game-info">
+				<div class="moves"><i class="fa fa-hand-rock"></i> <span class="moves__text">MOVES:</span> <span class="moves__counter">0</span></div>
+				<div class="time"><i class="fa fa-stopwatch"></i> <span class="time__text">TIMER:</span> <span class="time__counter"><label id="minutes">00</label>:<label id="seconds">00</label></span></div>
+			</div>
+		</header>
+
+		<div class="game-board"></div>
+
+		<div class="reset-game-button-wrapper">
+			<span class="reset-game-button"><i class="fa fa-undo"></i> RESET</span>
+		</div>
+
+		<div class="end-screen">
+			<h2 class="end-screen__message"></h2>
+			<div class="end-screen__stats">
+				<div class="end-screen__stars"></div>
+				<div class="end-screen__timer"></div>
+			</div>
+		</div>
+
+		<!-- build:js scripts/vendor.js -->
+		<!-- bower:js -->
+		<!-- endbower -->
+		<!-- endbuild -->
+
+		<!-- build:js scripts/main.js -->
+		<script src="scripts/main.js"></script>
+		<script defer src="scripts/fa-solid.js"></script>
+		<script src="scripts/fontawesome.js"></script>
+		<!-- endbuild -->
+		</body>
+</html>
